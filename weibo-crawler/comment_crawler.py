@@ -12,9 +12,10 @@ import urllib3
 import pandas as pd
 
 from multiprocessing.dummy import Pool as ThreadPool
+from cookies import wb_cookie
 
 urllib3.disable_warnings()
-cookie = 'PC_TOKEN=d0e4f9b942; WBtopGlobal_register_version=2023040822; crossidccode=CODE-tc-1PL9q0-18kVQl-GBsqiQgBC5oensUf50771; SSOLoginState=1680963599; SUB=_2A25JNQhfDeRhGeBP4lIY8C_EyDiIHXVq2agXrDV8PUJbkNAGLXPXkW1NRTTmVnflAjWQl3we9D4E6Z0ndbyUIgvg; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9W53X45zJJ-ABaJxP9AiP9wM5NHD95QceK.71K5p1heXWs4DqcjDi--Xi-zRiKy2i--ciK.fi-2Ei--fiKysiK.pi--fi-zRiK.cS0nR1Ket; XSRF-TOKEN=IvoBYI7LT7iQN-vUNoU7MdYH; WBPSESS=C5RsgX1CY-aVrSWJ2OzoI3y5fTPVRAwEERIv6Tep6_AURuoqUXYbQ-7CXFxJJJYXmav5YmvwkBJfX2FPX9rTiW2thatqLwyk-ShZn24g1m01GBgUwKLh_Uc8KkUUqmcXDzBMJZTN2nPXPOBJlYEIow=='  # 微博的cookie
+cookie = wb_cookie  # 微博的cookie
 
 headers = {
     'Accept-Encoding': 'gzip, deflate, sdch',
@@ -158,7 +159,7 @@ def save_afile(alls, filename):
             for j in range(len(data)):
                 sheet1.write(i, j, data[j])
             i = i + 1
-    f.save(f'./今年/{filename}.xls')  # 保存路径
+    f.save(f'./今年评论/{filename}.xls')  # 保存路径
 
 
 def extract(inpath, l):

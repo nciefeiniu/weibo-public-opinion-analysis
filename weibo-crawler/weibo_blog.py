@@ -8,6 +8,7 @@ from fake_useragent import UserAgent  # 随机请求头
 import urllib3
 from bs4 import BeautifulSoup  # 解析网页
 from pandas.core.frame import DataFrame
+from cookies import wb_cookie
 
 urllib3.disable_warnings()
 
@@ -300,7 +301,7 @@ def save_excel(a_list, filename):
     data = data.T  # 转置之后得到想要的结果
     data.rename(columns={0: '博文id', 1: '博文bid', 2: '用户id', 3: '用户名', 4: '发博时间', 5: '博文文本', 6: '转发数',
                          7: '评论数', 8: '点赞数'}, inplace=True)  # 注意这里0和1都不是字符串
-    DataFrame(data).to_excel(filename + '.xlsx', sheet_name='正文', index=False)
+    DataFrame(data).to_excel(f'./正文/{filename}.xlsx', sheet_name='正文', index=False)
 
 
 if __name__ == '__main__':
@@ -310,7 +311,7 @@ if __name__ == '__main__':
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
         'Connection': 'keep-alive',
-        'Cookie': 'PC_TOKEN=d0e4f9b942; WBtopGlobal_register_version=2023040822; crossidccode=CODE-tc-1PL9q0-18kVQl-GBsqiQgBC5oensUf50771; SSOLoginState=1680963599; SUB=_2A25JNQhfDeRhGeBP4lIY8C_EyDiIHXVq2agXrDV8PUJbkNAGLXPXkW1NRTTmVnflAjWQl3we9D4E6Z0ndbyUIgvg; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9W53X45zJJ-ABaJxP9AiP9wM5NHD95QceK.71K5p1heXWs4DqcjDi--Xi-zRiKy2i--ciK.fi-2Ei--fiKysiK.pi--fi-zRiK.cS0nR1Ket; XSRF-TOKEN=IvoBYI7LT7iQN-vUNoU7MdYH; WBPSESS=C5RsgX1CY-aVrSWJ2OzoI3y5fTPVRAwEERIv6Tep6_AURuoqUXYbQ-7CXFxJJJYXmav5YmvwkBJfX2FPX9rTiW2thatqLwyk-ShZn24g1m01GBgUwKLh_Uc8KkUUqmcXDzBMJZTN2nPXPOBJlYEIow==',  # 填入自己的
+        'Cookie': wb_cookie,  # 填入自己的
         'Host': 's.weibo.com',
         'Referer': 'https://weibo.com/',
         'Sec-Fetch-Dest': 'document',
