@@ -70,3 +70,55 @@ https://github.com/stay-leave/weibo-crawler
 4.主题分析: 针对正文进行，将其按月份聚合，进行分词成TXT，导入lda进行训练，找到最优模型进行结果输出。
 2.主题演化趋势: 根据主题分析结果，将关键词之间进行链接，绘制主题河流图。
 主要就是这些。
+
+
+
+## 详细的运行流程
+
+### 爬虫运行步骤：
+
+1. 获取微博的登录cookie
+2. 把cookie保存在 `weibo-crawler/cookies.py` 中
+3. 运行 `weibo_blog.py` (weibo-crawler目录里面)
+4. 运行 `comment_crawler.py`  (weibo-crawler目录里面)
+5. 运行 `user_info.py`  (weibo-crawler目录里面)
+6. 运行 `data_cleaning.py`  (weibo-crawler目录里面)
+
+### 情感分析运行步骤
+
+1. 去百度申请开发者账号，申请自然语言处理
+
+[https://console.bce.baidu.com/ai/#/ai/nlp/overview/index](https://console.bce.baidu.com/ai/#/ai/nlp/overview/index)
+
+如下图：
+![](./images/img.png)
+![](./images/img_1.png)
+
+把获取到的
+AppID	
+API Key	
+Secret Key
+填入到 `emotional_analysis/api_keys.py` 这个文件中
+
+先修改 `情感分析_API版.py` 里面的文件
+```python
+save_file(run('../weibo-crawler/清洗评论/M3RcTmtVC.xls'), '三情感值.xlsx')
+# 只需要修改  M3RcTmtVC.xls 这个，换为你自己目录下的文件
+```
+然后运行 `情感分析_API版.py`
+
+同理  `情感分析_SDK版.py` 一样的
+
+
+### LDA 运行步骤
+
+1. 运行 `excel转txt.py`，请自己修改names
+2. 运行 `分词处理.py` ，也是自己修改 a_na 的值为上一步的输出结果，也就是 `excel转txt结果` 目录下的文件
+3. 运行 `LDA+超参.py` 即可
+
+运行后会在这些目录下产生结果
+- 主题txt
+- 主题可视化
+- 主题新闻数
+- 分词结果
+- 推文话题标签
