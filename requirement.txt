@@ -13,3 +13,4 @@ openpyxl
 baidu-api==4.16.10
 chardet==5.0.0
 pyecharts==2.0.2
+scikit-learn==0.24.2
