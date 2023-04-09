@@ -168,7 +168,9 @@ def save_afile(alls, filename):
 if __name__ == '__main__':
     filenames = os.listdir(r'今年评论')  # 文件名
     for j in filenames:
-        items = file(r'今年评论\\' + j)
+        if j == '.keep':
+            continue
+        items = file(r'./今年评论/' + j)
         # print(items)
         pool = ThreadPool()
         alls = pool.map(clean, items)  # 多线程和普通的列表嵌套不一样，是直接将列表里面的元素取出来了。而且输出是二次嵌套列表
